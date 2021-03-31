@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   labels:
     app: web
-  name: mynginx
+  name: cosmeticapi
 spec:
   replicas: 1
   selector:
@@ -16,8 +16,8 @@ spec:
         app: web
     spec:
       containers:
-      - image: nginx
-        name: mynginx
+      - image: narawitrt/cosmeticapi
+        name: cosmeticapi
 
 ---
 apiVersion: v1
@@ -25,13 +25,13 @@ kind: Service
 metadata:
   labels:
     app: web
-  name: mynginx
+  name: cosmeticapi
 spec:
   ports:
   - nodePort: 32223
-    port: 80
+    port: 8085
     protocol: TCP
-    targetPort: 80
+    targetPort: 8085
   selector:
     app: web
   type: NodePort
