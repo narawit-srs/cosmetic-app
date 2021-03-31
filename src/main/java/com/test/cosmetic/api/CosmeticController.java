@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CosmeticController {
 	
     List<Cosmetic> cosmetics = new ArrayList<>(Arrays.asList(
-        new Cosmetic("Hellow", "Aof 777", 1),
+        new Cosmetic("Hellow", "Jojo abcd", 1),
         new Cosmetic("Hellow", "P Bank 888", 1)
     ));
     
