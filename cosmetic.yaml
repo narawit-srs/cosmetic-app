@@ -28,7 +28,7 @@ metadata:
   name: cosmeticapi
 spec:
   ports:
-  - nodePort: 32223
+  - nodePort: 32224
     port: 8085
     protocol: TCP
     targetPort: 8085
