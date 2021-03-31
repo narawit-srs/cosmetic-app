@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class CosmeticController {
 	
     List<Cosmetic> cosmetics = new ArrayList<>(Arrays.asList(
-        new Cosmetic("LIP001", "XOXO Lipstick", 1),
-        new Cosmetic("BRO001", "NYX Brush On Palette", 1)
+        new Cosmetic("Hellow", "Aof 777", 1),
+        new Cosmetic("Hellow", "P Bank 888", 1)
     ));
     
     @RequestMapping("/cosmetics")
