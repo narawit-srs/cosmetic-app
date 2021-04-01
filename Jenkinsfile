@@ -7,7 +7,7 @@ pipeline {
 
   agent { label 'kubepod' }
 
-
+    stages{
     // stage('Checkout Source') {
     //   steps {
     //     git url:'https://github.com/narawit-srs/cosmetic-app.git', branch:'main'
@@ -60,7 +60,6 @@ pipeline {
 
     node(kubepod) {
 
-      stages{
 
         stage('Get a Maven project') {
             git 'https://github.com/jenkinsci/kubernetes-plugin.git'
@@ -84,7 +83,8 @@ pipeline {
             }
         }
       }
-    }
 }
+
+    }
 
 }
