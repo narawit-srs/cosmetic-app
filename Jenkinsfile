@@ -5,7 +5,7 @@ pipeline {
     registryCredential = 'dockerhub'
   }
 
-  agent { label 'kubepod' }
+  agent { any }
   //agent { label 'kubepod' }
 
   stages {
