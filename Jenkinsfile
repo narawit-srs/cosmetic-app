@@ -15,11 +15,11 @@ pipeline {
       }
     }
 
-    stage('build java app') {
-      steps {
-        sh 'mvn -f pom.xml clean package'
-      }
-    }
+    // stage('build java app') {
+    //   steps {
+    //     sh 'mvn -f pom.xml clean package'
+    //   }
+    // }
 
     stage('Building image') {
       steps{
