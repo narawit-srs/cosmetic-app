@@ -6,6 +6,7 @@ pipeline {
   }
 
   agent { label 'kubepod' }
+  //agent { label 'kubepod' }
 
   stages {
 
