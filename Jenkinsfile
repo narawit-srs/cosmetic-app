@@ -21,6 +21,12 @@ pipeline {
     //   }
     // }
 
+    stage('who am i') {
+      steps {
+        sh 'who am i'
+      }
+    }
+
     stage('Building image') {
       steps{
         script {
