@@ -53,7 +53,7 @@ pipeline {
 
 
 
-    node(kubepod) {
+    node('kubepod') {
 
         stage('Checkout Source') {
       steps {
