@@ -62,6 +62,7 @@ pipeline {
           kubernetesDeploy(configs: "cosmetic.yaml", kubeconfigId: "mykubeconfig")
         }
       }
+    }
 
     // stage('Deploy App') {
     //   steps {
