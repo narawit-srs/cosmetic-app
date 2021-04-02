@@ -15,11 +15,11 @@ pipeline {
       }
     }
 
-    // stage('build java app') {
-    //   steps {
-    //     sh 'mvn -f pom.xml clean package'
-    //   }
-    // }
+    stage('build java app') {
+      steps {
+        sh 'mvn -f pom.xml clean package'
+      }
+    }
 
     stage('who am i') {
       steps {
@@ -35,7 +35,7 @@ pipeline {
       }
     }
 
-    stage('Deploy Image') {
+    stage('upload Image to registry') {
       steps{
         script {
           docker.withRegistry( '', registryCredential ) {
