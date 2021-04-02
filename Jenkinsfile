@@ -51,13 +51,35 @@ pipeline {
       }
     }
 
-    stage('Deploy App') {
+
+
+    node(kubepod) {
+
+        stage('Checkout Source') {
       steps {
-        script {
-          kubernetesDeploy(configs: "cosmetic.yaml", kubeconfigId: "mykubeconfig")
-        }
+        git url:'https://github.com/narawit-srs/cosmetic-app.git', branch:'main'
       }
     }
+
+      stage('Deploy App') {
+          steps {
+            script {
+              kubernetesDeploy(configs: "cosmetic.yaml", kubeconfigId: "mykubeconfig")
+            }
+          }
+      }
+    }
+
+    // stage('Deploy App') {
+    //   steps {
+    //     script {
+    //       kubernetesDeploy(configs: "cosmetic.yaml", kubeconfigId: "mykubeconfig")
+    //     }
+    //   }
+    // }
+
+
+
 
   }
 
