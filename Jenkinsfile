@@ -11,7 +11,7 @@ pipeline {
 
     stage('Checkout Source') {
       steps {
-        git url:'https://github.com/narawit-srs/cosmetic-app.git', branch:'main'
+        git url: 'https://github.com/narawit-srs/cosmetic-app.git', branch: 'main'
       }
     }
 
@@ -28,7 +28,7 @@ pipeline {
     }
 
     stage('Building image') {
-      steps{
+      steps {
         script {
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
@@ -36,9 +36,9 @@ pipeline {
     }
 
     stage('upload Image to registry') {
-      steps{
+      steps {
         script {
-          docker.withRegistry( '', registryCredential ) {
+          docker.withRegistry('', registryCredential) {
             dockerImage.push()
           }
         }
@@ -46,29 +46,22 @@ pipeline {
     }
 
     stage('Remove Unused docker image') {
-      steps{
+      steps {
         sh "docker rmi $registry:$BUILD_NUMBER"
       }
     }
 
-      stage('Checkout Source') {
-        steps {
-          node('kubepod') {
-          git url:'https://github.com/narawit-srs/cosmetic-app.git', branch:'main'
+
+    stage('Deploy App') {
+
+      agent {
+        label 'kubepod'
+      }
+      steps {
+        script {
+          kubernetesDeploy(configs: "cosmetic.yaml", kubeconfigId: "mykubeconfig")
         }
       }
-    }
-
-      stage('Deploy App') {
-        steps {
-          script {
-              node('kubepod') {
-              kubernetesDeploy(configs: "cosmetic.yaml", kubeconfigId: "mykubeconfig")
-              }
-            }
-          }
-      }
-
 
     // stage('Deploy App') {
     //   steps {
@@ -77,9 +70,6 @@ pipeline {
     //     }
     //   }
     // }
-
-
-
 
   }
 
