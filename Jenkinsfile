@@ -23,7 +23,7 @@ pipeline {
 
     stage('who am i') {
       steps {
-        sh 'who am i'
+        sh 'whoami'
       }
     }
 
