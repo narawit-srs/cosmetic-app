@@ -7,7 +7,10 @@ pipeline {
 
   agent any
 
-  stages {
+  node {
+    //run stuff on any node
+    
+stages {
 
     stage('Checkout Source') {
       steps {
@@ -60,17 +63,9 @@ pipeline {
     // }
 
 
-node('kubepod') {
-        stage('Deploy App') {
-            steps {
-                script {
-                  kubernetesDeploy(configs: "cosmetic.yaml", kubeconfigId: "mykubeconfig")
-                }
-            }
-        }
-    }
 
-
+        
+    
 
     // stage('Deploy App') {
     //   steps {
@@ -82,4 +77,16 @@ node('kubepod') {
 
   }
 
+    node('kubepod'){
+        //run stuff on agent; other node is still busy
+        stage('Deploy App') {
+            steps {
+                script {
+                  kubernetesDeploy(configs: "cosmetic.yaml", kubeconfigId: "mykubeconfig")
+                }
+            }
+        }
+    }
+    //return to original node; no message since it is still open
+  }
 }
