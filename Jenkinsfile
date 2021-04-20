@@ -21,12 +21,6 @@ pipeline {
       }
     }
 
-    stage('who am i') {
-      steps {
-        sh 'whoami'
-      }
-    }
-
     stage('Building image') {
       steps {
         script {
@@ -52,17 +46,32 @@ pipeline {
     }
 
 
-    stage('Deploy App') {
 
-      agent {
-        label 'kubepod'
-      }
-      steps {
-        script {
-          kubernetesDeploy(configs: "cosmetic.yaml", kubeconfigId: "mykubeconfig")
+    // stage('Deploy App') {
+
+    //   agent {
+    //     label 'kubepod'
+    //   }
+      // steps {
+      //   script {
+      //     kubernetesDeploy(configs: "cosmetic.yaml", kubeconfigId: "mykubeconfig")
+      //   }
+      // }
+    // }
+
+podTemplate {
+    node('kubepod') {
+        stage('Deploy App') {
+            steps {
+                script {
+                  kubernetesDeploy(configs: "cosmetic.yaml", kubeconfigId: "mykubeconfig")
+                }
+            }
         }
-      }
     }
+}
+
+
 
     // stage('Deploy App') {
     //   steps {
