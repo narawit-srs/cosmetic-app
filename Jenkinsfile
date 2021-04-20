@@ -57,9 +57,16 @@ pipeline {
       }
     }
 
+    stage('Checkout Source') {
+      agent { 
+          label 'kubepod'
+      }
+      steps {
+        git url: 'https://github.com/narawit-srs/cosmetic-app.git', branch: 'main'
+      }
+    }
 
     stage('Deploy App') {
-
       agent { 
           label 'kubepod'
       }
