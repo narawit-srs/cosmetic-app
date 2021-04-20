@@ -7,7 +7,7 @@ pipeline {
 
   agent any
 
-
+  stages {
 
     stage('Checkout Source') {
       steps {
@@ -59,8 +59,8 @@ pipeline {
       // }
     // }
 
-podTemplate {
-    node('kubepod') {
+
+node('kubepod') {
         stage('Deploy App') {
             steps {
                 script {
@@ -69,7 +69,6 @@ podTemplate {
             }
         }
     }
-}
 
 
 
@@ -81,6 +80,6 @@ podTemplate {
     //   }
     // }
 
-  
+  }
 
 }
