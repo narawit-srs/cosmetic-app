@@ -7,10 +7,7 @@ pipeline {
 
   agent any
 
-  node {
-    //run stuff on any node
-    
-stages {
+  stages {
 
     stage('Checkout Source') {
       steps {
@@ -21,6 +18,12 @@ stages {
     stage('build java app') {
       steps {
         sh 'mvn -f pom.xml clean package'
+      }
+    }
+
+    stage('who am i') {
+      steps {
+        sh 'whoami'
       }
     }
 
@@ -49,23 +52,17 @@ stages {
     }
 
 
-
     // stage('Deploy App') {
 
     //   agent {
     //     label 'kubepod'
     //   }
-      // steps {
-      //   script {
-      //     kubernetesDeploy(configs: "cosmetic.yaml", kubeconfigId: "mykubeconfig")
-      //   }
-      // }
+    //   steps {
+    //     script {
+    //       kubernetesDeploy(configs: "cosmetic.yaml", kubeconfigId: "mykubeconfig")
+    //     }
+    //   }
     // }
-
-
-
-        
-    
 
     // stage('Deploy App') {
     //   steps {
@@ -77,16 +74,12 @@ stages {
 
   }
 
-    node('kubepod'){
-        //run stuff on agent; other node is still busy
-        stage('Deploy App') {
-            steps {
-                script {
-                  kubernetesDeploy(configs: "cosmetic.yaml", kubeconfigId: "mykubeconfig")
-                }
-            }
+  podTemplate {
+    node('kubepod') {
+        stage('Run shell') {
+            sh 'echo hello world'
         }
     }
-    //return to original node; no message since it is still open
-  }
+}
+
 }
