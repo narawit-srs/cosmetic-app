@@ -89,12 +89,13 @@ pipeline {
     //     }
     //   }
     // }
-
+node{
     stage('Apply Kubernetes files') {
       withKubeConfig([credentialsId: 'mykubeconfig', serverUrl: 'https://172.16.16.100:6443']) {
         sh 'kubectl get pod -A'
       }
-  }
+    }
+}
 
   }
 
