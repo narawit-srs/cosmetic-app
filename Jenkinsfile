@@ -12,16 +12,9 @@ pipeline {
     stage('test pararel'){
       parallel {
                 stage('Test On master') {
-                    agent {
-                        label any
-                    }
+                    agent any
                     steps {
-                        git url: 'https://github.com/narawit-srs/cosmetic-app.git', branch: 'main'
-                    }
-                    post {
-                        always {
-                            junit "**/TEST-*.xml"
-                        }
+                        echo "test on Master"
                     }
                 }
                 stage('Test On agent') {
@@ -29,12 +22,7 @@ pipeline {
                         label "kubepod"
                     }
                     steps {
-                        git url: 'https://github.com/narawit-srs/cosmetic-app.git', branch: 'main'
-                    }
-                    post {
-                        always {
-                            junit "**/TEST-*.xml"
-                        }
+                        echo "test on agent"
                     }
                 }
             }
