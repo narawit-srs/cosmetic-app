@@ -40,15 +40,6 @@ pipeline {
             }
     }
 
-    stage('test create kubepod') {
-      agent { 
-          label 'kubepod'
-      }
-      steps {
-        git url: 'https://github.com/narawit-srs/cosmetic-app.git', branch: 'main'
-      }
-    }
-
     stage('Checkout Source') {
       agent any
       steps {
@@ -97,20 +88,12 @@ pipeline {
       }
     }
 
-    stage('Checkout Source for agent') {
+    stage('Checkout Source for agent and Deploy app') {
       agent { 
           label 'kubepod'
       }
       steps {
         git url: 'https://github.com/narawit-srs/cosmetic-app.git', branch: 'main'
-      }
-    }
-
-    stage('Deploy App') {
-      agent { 
-          label 'kubepod'
-      }
-      steps {
         script {
           kubernetesDeploy(configs: "cosmetic.yaml", kubeconfigId: "mykubeconfig")
         }
@@ -118,6 +101,9 @@ pipeline {
     }
 
     // stage('Deploy App') {
+    //   agent { 
+    //       label 'kubepod'
+    //   }
     //   steps {
     //     script {
     //       kubernetesDeploy(configs: "cosmetic.yaml", kubeconfigId: "mykubeconfig")
@@ -126,13 +112,5 @@ pipeline {
     // }
 
   }
-
-//   podTemplate {
-//     node('kubepod') {
-//         stage('Run shell') {
-//             sh 'echo hello world'
-//         }
-//     }
-// }
 
 }
