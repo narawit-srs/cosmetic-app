@@ -4,7 +4,7 @@ pipeline {
     registry = "narawitrt/cosmeticapi"
     registryCredential = 'dockerhub'
     sonarProjectKey = "testsonar" 
-	  sonarServer = "http://127.0.0.1:9000"
+	  sonarServer = "127.0.0.1:9000"
 	  sonarToken = "sonaradmin" // Replace your credential
   }
 
