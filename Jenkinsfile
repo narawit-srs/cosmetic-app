@@ -42,18 +42,18 @@ pipeline {
       }
     }
 
-    stage('Sonar Scan') {
-              steps {
-                  sh '''
-                  pwd
-                  mvn sonar:sonar -Dsonar.projectKey=${sonarProjectKey} -Dsonar.host.url=${sonarServer} -Dsonar.login=${sonarToken} -f pom.xml
-                  chown -hR 989 target/sonar
-	                chgrp -hR 983 target/sonar
-                  '''
-                  // mvn sonar:sonar -Dsonar.projectKey=${sonarProjectKey} -Dsonar.host.url=${sonarServer} -Dsonar.login=${sonarToken} -f pom.xml
+    // stage('Sonar Scan') {
+    //           steps {
+    //               sh '''
+    //               pwd
+    //               mvn sonar:sonar -Dsonar.projectKey=${sonarProjectKey} -Dsonar.host.url=${sonarServer} -Dsonar.login=${sonarToken} -f pom.xml
+    //               chown -hR 989 target/sonar
+	  //               chgrp -hR 983 target/sonar
+    //               '''
+    //               // mvn sonar:sonar -Dsonar.projectKey=${sonarProjectKey} -Dsonar.host.url=${sonarServer} -Dsonar.login=${sonarToken} -f pom.xml
                   
-              }
-        }
+    //           }
+    //     }
 
     stage('Building image') {
       steps {
