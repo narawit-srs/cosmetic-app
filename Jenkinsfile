@@ -3,9 +3,9 @@ pipeline {
   environment {
     registry = "narawitrt/cosmeticapi"
     registryCredential = 'dockerhub'
-    sonarProjectKey = "$serviceName" 
+    sonarProjectKey = "testsonar" 
 	  sonarServer = "http://127.0.0.1:9000"
-	  sonarToken = "125c238bcf59f3464fd53e916bdb91e988d7f879" // Replace your credential
+	  sonarToken = "sonaradmin" // Replace your credential
   }
 
   agent any
@@ -46,7 +46,7 @@ pipeline {
               steps {
                   sh '''
                   pwd
-                  mvn sonar:sonar -Dsonar.host.url=${sonarServer} -f pom.xml
+                  mvn sonar:sonar -Dsonar.projectKey=${sonarProjectKey} -Dsonar.host.url=${sonarServer} -Dsonar.login=${sonarToken} -f pom.xml
                   chown -hR 989 target/sonar
 	                chgrp -hR 983 target/sonar
                   '''
