@@ -9,6 +9,15 @@ pipeline {
 
   stages {
 
+    stage('Checkout Source for agent') {
+      agent { 
+          label 'kubepod'
+      }
+      steps {
+        git url: 'https://github.com/narawit-srs/cosmetic-app.git', branch: 'main'
+      }
+    }
+
     stage('Checkout Source') {
       agent any
       steps {
