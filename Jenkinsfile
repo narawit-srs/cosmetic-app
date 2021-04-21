@@ -9,7 +9,7 @@ pipeline {
 
   stages {
 
-    stage('Checkout Source for agent') {
+    stage('test create kubepod') {
       agent { 
           label 'kubepod'
       }
