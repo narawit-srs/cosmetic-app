@@ -15,7 +15,7 @@ pipeline {
     stage('Apply Kubernetes files') {
       steps{
       withKubeConfig([credentialsId: 'kubeconfig_cluster', serverUrl: 'https://172.16.16.100:6443']) {
-        sh 'kubectl get pod -A'
+        sh '/usr/local/bin/kubectl get pod -A'
       }
       }
     }
